@@ -19,7 +19,7 @@ scikit-learn
 
 # Document Processing
 unstructured[pdf,docx]
-python-magic-bin==0.4.14
+python-magic
 
 # Utilities
 python-dotenv
