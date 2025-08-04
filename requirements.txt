@@ -2,21 +2,24 @@
 fastapi
 uvicorn[standard]
 
-# LangChain and Google Generative AI integration
+# LangChain Core & Integrations
 langchain
 langchain-core
 langchain-community
 langchain-unstructured
 langchain-google-genai
 langchain-text-splitters
-flashrank
 
 # Vector Database
 pinecone
 
+# Retrieval & Machine Learning
+flashrank
+scikit-learn
+
 # Document Processing
 unstructured[pdf,docx]
-python-magic-bin==0.4.14 # A dependency for unstructured on Windows
+python-magic-bin==0.4.14
 
 # Utilities
 python-dotenv
