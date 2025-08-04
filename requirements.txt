@@ -8,6 +8,7 @@ langchain-core
 langchain-community
 langchain-unstructured
 langchain-google-genai
+langchain_pinecone
 langchain-text-splitters
 
 # Vector Database
