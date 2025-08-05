@@ -36,7 +36,7 @@ import numpy as np
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain_community.document_compressors import FlashrankRerank
 
-from app.core import config
+from core import config
 
 pinecone_client = PineconeClient(api_key=config.PINECONE_API_KEY)
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=config.GOOGLE_API_KEY)
@@ -217,23 +217,32 @@ def create_rag_chain(vector_store: PineconeVectorStore, tfidf_vectorizer: TfidfV
     7. Use formal language and retain any legal or technical terminology as mentioned in the policy.
     8. Follow the same order as the questions.
     9. If the question is not answerable, respond with "The answer to this question is not available in the document."
-    10. If the question is about a specific term or condition, provide the exact text from the document that answers it.
-    11. If the question is about a specific number or date, provide that exact number or date.
-    12. If the question is about a specific section or clause, provide the exact text from that section or clause.
-    13. If the question is about a specific benefit or coverage, provide the exact text that describes that benefit or coverage.
-    14. If the question is about a specific exclusion or limitation, provide the exact text that describes that exclusion or limitation.
-    15. If the question is about a specific claim process, provide the exact text that describes that process.
-    16. If the question is about a specific term or definition, provide the exact text that defines that term.
-    17. If the question is about a specific condition or requirement, provide the exact text that describes that condition or requirement.
-    18. If the question is about a specific policy feature, provide the exact text that describes that feature.
-    19. If the question is about a specific policy term, provide the exact text that describes that term.
-    20. If the question is about a specific policy condition, provide the exact text that describes that condition.
-    21. If the question is about a specific policy exclusion, provide the exact text that describes that exclusion.
-    22. If the question is about a specific policy limitation, provide the exact text that describes that limitation.
-    23. If the question is about a specific policy benefit, provide the exact text that describes that benefit.
-    24. If the question is about a specific policy coverage, provide the exact text that describes that coverage.
-    25. If the question is about a specific policy claim, provide the exact text that describes that claim.
-    26. DONT EXCEED THE 2 SENTENCE LIMIT.
+    10.Include all relevant numeric data found in the document, such as:
+
+Age limits (e.g., minimum and maximum entry age)
+
+Waiting periods (e.g., “36 months")
+
+Coverage limits (e.g., “₹25,000 per claim, maximum of 3 claims per year”)
+
+Percentages (e.g., “10% co-payment for claimants over 60 years”)
+
+Timeframes (e.g., “policy term: 20 years”, “grace period: 30 days”)
+
+Specific figures, quantities, and durations stated in the document
+
+Use policy wording, specific section references, and precise details from the document.
+
+EXAMPLE ANSWERS:
+Example 1:
+Q: What is the entry age and renewal policy for the Star Comprehensive Insurance?
+A:Entry age: Minimum 3 months; maximum 65 years at entry.Lifelong renewals are guaranteed.There is no exit age.Dependent children can be covered up to 25 years of age.
+
+Example 2:
+Q: Are maternity and newborn expenses covered, and what are the waiting periods?
+A:Maternity (delivery/hospitalization) is covered, with limits based on the sum insured.Normal delivery: ₹10,000–₹25,000 per delivery (see table in policy for exact SI).Caesarean section: ₹15,000–₹40,000 per delivery.Coverage for the newborn: Up to ₹50,000 or ₹1,00,000, depending on the plan.Vaccination expenses for the newborn: Up to ₹1,000 (only if delivery claim is approved).A 36-month waiting period applies before these benefits become available.
+
+ALWAYS extract and include any and all applicable numeric values (age, rupees, years, months, %, days, etc.) provided in the document and present them in your answer.
 
     FINAL CONCISE ANSWER:
     """
