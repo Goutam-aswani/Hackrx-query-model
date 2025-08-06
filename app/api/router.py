@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Header, HTTPException, Depends
 from app.models.schemas import HackRxRequest, HackRxResponse
-from services.rag_pipeline import (
+from app.services.rag_pipeline import (
     load_documents_from_url, 
     setup_hybrid_retriever, 
     create_rag_chain
