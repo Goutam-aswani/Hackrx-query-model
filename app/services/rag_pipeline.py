@@ -36,7 +36,7 @@ import numpy as np
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain_community.document_compressors import FlashrankRerank
 
-from core import config
+from app.core import config
 
 pinecone_client = PineconeClient(api_key=config.PINECONE_API_KEY)
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=config.GOOGLE_API_KEY)

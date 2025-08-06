@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.router import router as hackrx_router
+from app.api.router import router as hackrx_router
 
 app = FastAPI(
     title="Intelligent Query–Retrieval System",
